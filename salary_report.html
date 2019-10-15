@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salary Report</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans;
+            color: #494949;
+            font-size: 12px;
+            margin: 0px;
+            height: 100%
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 23px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        /*Table*/
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead tr th, table tbody tr td, table tfoot tr td {
+            padding: 10px;
+        }
+
+        table.header-invoice tbody tr td {
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        table tbody tr td {
+            /*border-top: 1px solid #c0c0c0;*/
+        }
+
+        /*Login*/
+        .logo {
+            text-align: left;
+        }
+
+        /*wrapping*/
+        .wrapping-1 {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+            /*background-image: url('https://www.globalxtreme.net/images/share/gx-bg-img.png');*/
+            background-repeat: no-repeat;
+            background-position: -280px -50px;
+        }
+
+        .header, .footer, .wrapping-divider {
+            display: flow-root;
+            clear: both;
+            width: 100%;
+        }
+
+        .wrapping-body {
+            padding: 10px 20px 40px 20px;
+        }
+
+        .body-text {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .wrapping-footer {
+            /*background-color: #242424;*/
+            padding: 20px 30px 20px 20px;
+            /*color:#adadad;*/
+            font-size: 13px;
+        }
+
+        .wrapping-footer p a {
+            color: #adadad;
+        }
+
+        .no-underline {
+            text-decoration: none;
+        }
+
+        .border-top-gray {
+            border-top: 1px solid #c0c0c0;
+        }
+
+        .border-bottom-gray {
+            border-bottom: 1px solid #c0c0c0;
+        }
+
+        .border-left-gray {
+            border-left: 1px solid #c0c0c0;
+        }
+
+        .border-right-gray {
+            border-right: 1px solid #c0c0c0;
+        }
+
+        /* Margin Top 0-30 */
+        .no-margin {
+            margin: 0;
+        }
+
+        .m-t-0 {
+            margin-top: 0px;
+        }
+
+        .m-b-0 {
+            margin-bottom: 0px;
+        }
+
+        .m-b-5 {
+            margin-bottom: 5px;
+        }
+
+        .m-t-5 {
+            margin-top: 5px;
+        }
+
+        .m-r-5 {
+            margin-right: 5px;
+        }
+
+        .m-t-10 {
+            margin-top: 10px;
+        }
+
+        .m-t-15 {
+            margin-top: 15px;
+        }
+
+        .m-t-20 {
+            margin-top: 20px;
+        }
+
+        .m-t-25 {
+            margin-top: 25px;
+        }
+
+        .m-t-30 {
+            margin-top: 30px;
+        }
+
+        .m-t-35 {
+            margin-top: 35px;
+        }
+
+        .m-t-40 {
+            margin-top: 40px;
+        }
+
+        .m-t-45 {
+            margin-top: 45px;
+        }
+
+        .m-t-50 {
+            margin-top: 50px;
+        }
+
+        .m-b-20 {
+            margin-bottom: 20px;
+        }
+
+        .m-b-25 {
+            margin-bottom: 25px;
+        }
+
+        .m-b-35 {
+            margin-bottom: 35px;
+        }
+
+        .m-b-40 {
+            margin-bottom: 40px;
+        }
+
+        .m-b-45 {
+            margin-bottom: 45px;
+        }
+
+        .m-b-50 {
+            margin-bottom: 50px;
+        }
+
+        .m-l-0 {
+            margin-left: 0px;
+        }
+
+        .m-l-5 {
+            margin-left: 5px;
+        }
+
+        .m-l-10 {
+            margin-left: 10px;
+        }
+
+        .m-l-15 {
+            margin-left: 15px;
+        }
+
+        .m-l-20 {
+            margin-left: 20px;
+        }
+
+        .m-l-25 {
+            margin-left: 25px;
+        }
+
+        .m-l-30 {
+            margin-left: 30px;
+        }
+
+        /* Padding Top 0-30 */
+        .no-padding {
+            padding: 0;
+        }
+
+        .p-t-0 {
+            padding-top: 0px;
+        }
+
+        .p-t-5 {
+            padding-top: 5px;
+        }
+
+        .p-t-10 {
+            padding-top: 10px;
+        }
+
+        .p-t-15 {
+            padding-top: 15px;
+        }
+
+        .p-t-20 {
+            padding-top: 20px;
+        }
+
+        .p-t-25 {
+            padding-top: 25px;
+        }
+
+        .p-t-30 {
+            padding-top: 30px;
+        }
+
+        .p-l-0 {
+            padding-left: 0px;
+        }
+
+        .p-l-5 {
+            padding-left: 5px;
+        }
+
+        .p-l-10 {
+            padding-left: 10px;
+        }
+
+        .p-l-15 {
+            padding-left: 15px;
+        }
+
+        .p-l-20 {
+            padding-left: 20px;
+        }
+
+
+        .p-r-5 {
+            padding-right: 5px;
+        }
+
+        .p-r-10 {
+            padding-right: 10px;
+        }
+
+        .p-r-15 {
+            padding-right: 15px;
+        }
+
+        .p-r-20 {
+            padding-right: 20px;
+        }
+
+
+        .padding-10 {
+            padding: 10px;
+        }
+
+        /* with Size 20%-100%*/
+        .w-5 {
+            width: 5%;
+        }
+
+        .w-10 {
+            width: 10%;
+        }
+
+        .w-15 {
+            width: 15%;
+        }
+
+        .w-20 {
+            width: 20%;
+        }
+
+        .w-25 {
+            width: 25%;
+        }
+
+        .w-30 {
+            width: 30%;
+        }
+
+        .w-35 {
+            width: 35%;
+        }
+
+        .w-40 {
+            width: 40%;
+        }
+
+        .w-45 {
+            width: 45%;
+        }
+
+        .w-50 {
+            width: 50%;
+        }
+
+        .w-55 {
+            width: 55%;
+        }
+
+        .w-60 {
+            width: 60%;
+        }
+
+        .w-70 {
+            width: 70%;
+        }
+
+        .w-75 {
+            width: 75%;
+        }
+
+        .w-80 {
+            width: 80%;
+        }
+
+        .w-90 {
+            width: 90%;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .tbl-600 {
+            width: 600px;
+        }
+
+        /*text-align*/
+        .tx-left {
+            text-align: left;
+        }
+
+        .tx-right {
+            text-align: right;
+        }
+
+        .tx-center {
+            text-align: center;
+        }
+
+        /*vertical-align*/
+        .txv-top {
+            vertical-align: top;
+        }
+
+        .txv-center {
+            vertical-align: middle;
+        }
+
+        .txv-bottom {
+            vertical-align: bottom;
+        }
+
+        /*color text*/
+        .color-gray {
+            color: #8b8b8b;
+        }
+
+        .color-blue {
+            color: #0275d8;
+        }
+
+        .color-black {
+            color: #000;
+        }
+
+        /*font size*/
+        .fs-12 {
+            font-size: 12px;
+        }
+
+        .fs-13 {
+            font-size: 13px;
+        }
+
+        .fs-14 {
+            font-size: 14px;
+        }
+
+        .fs-15 {
+            font-size: 15px;
+        }
+
+        .fs-16 {
+            font-size: 16px;
+        }
+
+        .fs-17 {
+            font-size: 17px;
+        }
+
+        .fs-18 {
+            font-size: 18px;
+        }
+
+        .fs-19 {
+            font-size: 19px;
+        }
+
+        /*font weight*/
+        .fw-100 {
+            font-weight: 100;
+        }
+
+        .fw-200 {
+            font-weight: 200;
+        }
+
+        .fw-300 {
+            font-weight: 300;
+        }
+
+        .fw-400 {
+            font-weight: 400;
+        }
+
+        .fw-500 {
+            font-weight: 500;
+        }
+
+        .fw-600 {
+            font-weight: 600;
+        }
+
+        .fw-700 {
+            font-weight: 700;
+        }
+
+        .fw-800 {
+            font-weight: 800;
+        }
+
+        .fw-900 {
+            font-weight: 900;
+        }
+
+        .fw-bold {
+            font-weight: bold;
+        }
+
+        .pull-right {
+            float: right;
+        }
+
+        .pull-left {
+            float: left;
+        }
+
+        .bg-blue {
+            background-color: #0275d8;
+        }
+
+        .bg-black {
+            background-color: black;
+        }
+
+        .bg-grey-light {
+            background-color: #ddd;
+        }
+
+        .no-border {
+            /*border: unset;*/
+        }
+
+        .color-white {
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            font-weight: normal;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 6px 10px;
+            font-size: 1rem;
+            -webkit-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #0275d8;
+            border-color: #0275d8;
+        }
+
+        .page-break { /*untuk pembatas perhalaman*/
+            page-break-after: always;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+        .clear-both {
+            clear: both;
+        }
+
+    </style>
+
+</head>
+<body>
+
+@foreach($salaryReport as $sum)
+
+<div class="wrapping-1">
+    <div class="wrapping-body">
+        <div class="header m-b-5">
+            <div class="logo pull-left">
+                <img src="{{public_path('images/company/logo/gx_new_logo.png')}}" alt="" height="auto"
+                     width="210px">
+            </div>
+            <div class="pull-right">
+                <h2 class="no-margin color-black">Salary Report</h2>
+                <table class="header-invoice">
+                    <tr>
+                        <td class="no-border">Date</td>
+                        <td class="p-l-5 no-border fw-bold">
+                            : {{$sum['data']['fromDate']}} - {{$sum['data']['toDate']}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="wrapping-divider m-b-5">
+            <table class="header-invoice color-black">
+                <tr>
+                    <td class="fs-14">
+                        Jl. Raya Kerobokan 388X Kuta Utara, Bali 80361 Indonesia
+                        <br>
+                        Phone : (0361) 736811
+                        <br>
+                        <a href="https://www.globalxtreme.net/" target="_blank">www.globalxtreme.net</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="wrapping-divider  m-t-15">
+            <div class="pull-left fs-14 inline-block color-black w-55">
+                <table class="header-invoice">
+                    <tr>
+                        <td colspan="2">
+                            <p class="fs-16 fw-bold">Employee</p>
+                        </td>
+                    </tr>
+                    @if($sum['data']['employee'])
+                    <tr>
+                        <td class="p-l-0 no-border w-30 txv-top">Name <span class="pull-right m-r-5">:</span></td>
+                        <td class="p-l-5 no-border w-70 fw-bold p-r-5">
+                            {{$sum['data']['employee']['givenName']}} {{$sum['data']['employee']['surname']}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-l-0 no-border txv-top">E-mail <span class="pull-right m-r-5">:</span></td>
+                        <td class="p-l-5 no-border fw-bold p-r-5">
+                            {{$sum['data']['employee']['email']}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-l-0 no-border txv-top">Address <span class="pull-right m-r-5">:</span></td>
+                        <td class="p-l-5 no-border fw-bold p-r-5">
+                            {{$sum['data']['employee']['address']}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-l-0 no-border">City <span class="pull-right m-r-5">:</span></td>
+                        <td class="p-l-5 no-border fw-bold">
+                            {{$sum['data']['employee']['city']}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-l-0 no-border">Hometown <span class="pull-right m-r-5">:</span></td>
+                        <td class="p-l-5 no-border fw-bold">
+                            {{$sum['data']['employee']['hometown']}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-l-0 no-border txv-top">Phone <span class="pull-right m-r-5">:</span></td>
+                        <td class="p-l-5 no-border fw-bold p-r-5">
+                            {{$sum['data']['employee']['phoneNo']}}
+                        </td>
+                    </tr>
+                    @endif
+                </table>
+            </div>
+
+            <div class="pull-right fs-14 inline-block color-black w-45">
+                <div class="pull-right w-80">
+                    <table class="header-invoice">
+                        <tr>
+                            <td colspan="2">
+                                <p class="fs-16 fw-bold">Job Position</p>
+                            </td>
+                        </tr>
+                        @if($sum['data']['position'])
+                        <tr>
+                            <td class="p-l-0 no-border txv-top w-30">Position <span class="pull-right m-r-5">:</span></td>
+                            <td class="p-l-5 no-border w-70 fw-bold">
+                                {{$sum['data']['position']['jobPositionName']}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-l-0 no-border txv-top">Division <span class="pull-right m-r-5">:</span></td>
+                            <td class="p-l-5 no-border fw-bold">
+                                {{$sum['data']['position']['divisionName']}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-l-0 no-border txv-top">Branch <span class="pull-right m-r-5">:</span></td>
+                            <td class="p-l-5 no-border fw-bold">
+                                {{$sum['data']['position']['branchOfficeName']}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-l-0 no-border txv-top">Status <span class="pull-right m-r-5">:</span></td>
+                            <td class="p-l-5 no-border fw-bold">
+                                {{$sum['data']['position']['recruitmentStatusName']}}
+                            </td>
+                        </tr>
+                        @endif
+                    </table>
+                </div>
+            </div>
+
+            <div class="clear-both"></div>
+        </div>
+
+        <div class="body-text">
+
+            <br>
+
+            <table class="">
+                <thead>
+                <tr class="fs-14" style="background-color: #000;color: #fff;">
+                    <th class="tx-center">Description</th>
+                    <th class="tx-left">Confirm Status</th>
+                    <th class="tx-left">Confirm Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="fw-400">
+                    <td class="tx-left w-50 fs-13 border-top-gray border-bottom-gray">
+                        Salary Report for Date {{$sum['data']['fromDate']}} - {{$sum['data']['toDate']}}
+                    </td>
+                    <td class="tx-left w-25 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{$sum['data']['confirmationStatusName']}}
+                    </td>
+                    <td class="tx-left w-25 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{!is_null($sum['data']['confirmationDate'])?$sum['data']['confirmationDate']:''}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <p class="fs-16 m-t-15">
+                Details
+            </p>
+
+            <br>
+
+            <table class="">
+                <thead>
+                <tr class="fs-14" style="background-color: #000;color: #fff;">
+                    <th class="tx-center">No.</th>
+                    <th class="tx-center">Description</th>
+                    <th class="tx-left">Type</th>
+                    <th class="tx-right">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($sum['data']['salaryCalculations'] as $key => $salaryCalculation)
+                <tr class="fw-400">
+                    <td class="tx-center w-5 fs-13 border-top-gray border-bottom-gray">
+                        {{$key+1}}
+                    </td>
+                    <td class="tx-left w-40 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{$salaryCalculation['SBCTypeName']}}
+                    </td>
+                    <td class="tx-left w-20 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{strtoupper($salaryCalculation['SBCTypeAddOrSub'])}}
+                    </td>
+                    <td class="tx-right w-35 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{$salaryCalculation['value']}}
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+            <br>
+
+            <p class="fs-16 m-t-15">
+                Overview
+            </p>
+
+            <br>
+
+            <table class="">
+                <thead>
+                <tr class="fs-14" style="background-color: #000;color: #fff;">
+                    <th class="tx-center">No.</th>
+                    <th class="tx-center">Description</th>
+                    <th class="tx-right">Basic</th>
+                    <th class="tx-right">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="fw-400">
+                    <td class="tx-center w-5 fs-13 border-top-gray border-bottom-gray">
+                        1
+                    </td>
+                    <td class="tx-left w-35 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        Basic Salary
+                    </td>
+                    <td class="tx-right w-30 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{number_format((int)$sum['data']['basicSalary'],2,',','.')}}
+                    </td>
+                    <td class="tx-right w-30 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{ $basicSalary = number_format(((float)$sum['data']['basicSalary']),2,',','.')}}
+                    </td>
+                </tr>
+                <tr class="fw-400">
+                    <td class="tx-center w-5 fs-13 border-top-gray border-bottom-gray">
+                        2
+                    </td>
+                    <td class="tx-left w-35 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        Total Salary Bonus
+                    </td>
+                    <td class="tx-right w-30 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{number_format((int)$sum['data']['totalSalaryBonus'],2,',','.')}}
+                    </td>
+                    <td class="tx-right w-30 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{ $basicPlusBonus = number_format( (float)$sum['data']['basicSalary'] + (float)$sum['data']['totalSalaryBonus'],2,',','.')}}
+                    </td>
+                </tr>
+                <tr class="fw-400">
+                    <td class="tx-center w-5 fs-13 border-top-gray border-bottom-gray">
+                        3
+                    </td>
+                    <td class="tx-left w-35 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        Total Salary Cut
+                    </td>
+                    <td class="tx-right w-30 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{number_format((int)$sum['data']['totalSalaryCut'],2,',','.')}}
+                    </td>
+                    <td class="tx-right w-30 fs-13 border-top-gray border-bottom-gray border-left-gray">
+                        {{$basicPlusBonusAfterCut = number_format((float)$sum['data']['basicSalary'] + (float)$sum['data']['totalSalaryBonus'] - (float)$sum['data']['totalSalaryCut'],2,',','.')}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <div class="wrapping-divider">
+                <table class="fw-100 fs-15">
+                    <tr style="font-weight:400;">
+                        <td style="padding:10px;" class="fs-16 tx-right fw-bold w-70">
+                            Salary Received :
+                        </td>
+                        <td style="padding:10px;background: #e2e2e2;" class="fs-16 tx-right fw-bold w-30">
+                            {{ number_format($sum['data']['salaryReceived'],2,',','.')}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <br>
+</div>
+<div class="page-break"></div>
+
+@endforeach
+
+</body>
+</html>
